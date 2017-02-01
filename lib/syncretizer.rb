@@ -4,13 +4,12 @@ require 'yaml'
 require 'psych'
 require 'uri'
 
-puts "v1"
+# "$(REPO)" $(IMAGE_NAME) $(IMAGE_TAG)
 
-exit 1
-
-registry_domain = (ARGV[0] && (ARGV[0])) || raise
-image_name = ARGV[1] || raise
-image_tag = ARGV[2] || raise
+rc_yml_path = ARGV[0] || raise
+registry_domain = ARGV[1] || raise
+image_name = ARGV[2] || raise
+image_tag = ARGV[3] || raise
 
 class DocumentStreamHandler < Psych::TreeBuilder
   def initialize &block
@@ -28,8 +27,6 @@ class DocumentStreamHandler < Psych::TreeBuilder
     push n
   end
 end
-
-rc_yml_path = File.join("kubernetes", "rc.yml")
 
 document_handler_switch = Proc.new do |document|
   add_to_pending_documents = false
