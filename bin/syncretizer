@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'syncretizer'
+puts ARGV.inspect
