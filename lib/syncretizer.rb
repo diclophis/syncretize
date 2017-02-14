@@ -37,7 +37,7 @@ if File.basename($0) == "syncretizer"
     case kind
       when "Service"
 
-      when "ReplicationController"
+      when "Deployment", "ReplicationController"
         description["spec"]["template"]["spec"]["containers"][0]["image"] = (registry_domain + (image_name + ":" + image_tag))
 
     else
