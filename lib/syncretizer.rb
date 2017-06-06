@@ -38,7 +38,9 @@ if File.basename($0) == "syncretizer"
       when "Service"
 
       when "Deployment", "ReplicationController"
-        description["spec"]["template"]["spec"]["containers"][0]["image"] = (registry_domain + (image_name + ":" + image_tag))
+        description["spec"]["template"]["spec"]["containers"].each { |c|
+          c["image"] = (registry_domain + (image_name + ":" + image_tag))
+        }
 
     else
     end
